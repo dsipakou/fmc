@@ -1,8 +1,9 @@
 from rest_framework.views import APIView
 
+from users import serializers
 from users.models import User
 
 
 class UserView(APIView):
-    def get(self, request):
-        users = User.objects.all()
+    serializer_class = serializers.UserSerializer
+    queryset = User.objects.all()
