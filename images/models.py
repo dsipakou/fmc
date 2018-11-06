@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Image(models.Model):
-    uuid = models.CharField(_('user uuid'), max_length=36, null=True, blank=True)
+    uuid = models.CharField(_('image uuid'), max_length=36, null=True, blank=True)
     photo = ProcessedImageField(verbose_name=_('photo'),
                                 upload_to='uploads/gallery/images',
                                 processors=[ResizeToFit(1920,1080)],
