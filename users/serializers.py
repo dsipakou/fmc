@@ -1,8 +1,10 @@
 from rest_framework import serializers
 
+from users.models import User
 
-class UserSerializer(serializers.Serializer):
-    email = serializers.CharField(read_only=True)
-    first_name = serializers.CharField(read_only=True)
-    last_name = serializers.CharField(read_only=True)
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
 

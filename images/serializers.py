@@ -1,7 +1,9 @@
 from rest_framework import serializers
 
+from images.models import Image
 
-class ImageSerializer(serializers.Serializer):
-    name = serializers.CharField(read_only=True)
-    description = serializers.CharField(read_only=True)
-    photo = serializers.ImageField(read_only=True)
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = '__all__'
