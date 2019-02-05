@@ -1,4 +1,8 @@
+import uuid
+
+from django.db.models import signals
 from django.db import models
+from django.dispatch import receiver
 from django.utils.safestring import mark_safe
 from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import ResizeToFit, ResizeToCover
@@ -26,5 +30,11 @@ class Image(models.Model):
         return mark_safe('<img src="{}" />'.format(self.photo_preview.url))
 
     admin_image_tag.short_description = _('image short desc')
+
+@receiver(signals.pre_save, sender=Image)
+def set_uuid_for_image(sender, instance=None, **kwargs):
+    if instance and not instance.uuid:
+        instance.uuid = uuid.uuid4()
+        instance.save()
 
 
