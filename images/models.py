@@ -1,5 +1,6 @@
 import uuid
 
+import shortuuid
 from django.db.models import signals
 from django.db import models
 from django.dispatch import receiver
@@ -34,7 +35,7 @@ class Image(models.Model):
 @receiver(signals.pre_save, sender=Image)
 def set_uuid_for_image(sender, instance=None, **kwargs):
     if instance and not instance.uuid:
-        instance.uuid = uuid.uuid4()
+        instance.uuid = shortuuid.encode(uuid.uuid4())
         instance.save()
 
 
